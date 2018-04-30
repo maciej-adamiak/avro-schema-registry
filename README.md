@@ -13,8 +13,6 @@ Run the project using command: `sbt "project registry" run`
 Create a schema registry enrollment: 
 ```bash
 curl -X PUT -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d '{
-	"strain": "test-event",
-	"version": "2.0.1",
 	"schema": {
         "namespace": "generic",
         "type": "record",
@@ -25,7 +23,7 @@ curl -X PUT -H "Content-Type: application/json" -H "Cache-Control: no-cache" -d 
              {  "name": "message",  "type": "string"}
         ]   
     }
-}' "http://localhost:8000/enrollment"
+}' "http://localhost:8000/enrollment/test-event/2.0.1"
 ```
 
 Find all schema registry enrollments:

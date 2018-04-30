@@ -12,7 +12,11 @@ import spray.json._
 
 import scala.concurrent.ExecutionContext
 
-class SchemaRegistryService(implicit val actorSystem: ActorSystem, implicit val executionContext: ExecutionContext, implicit val databaseConfig: DatabaseComponent) {
+class SchemaRegistryService(
+                             implicit val actorSystem: ActorSystem,
+                             implicit val executionContext: ExecutionContext,
+                             implicit val databaseConfig: DatabaseComponent
+                           ) {
 
   val schemaEnrollmentDao: SchemaEnrollmentDao = new SchemaEnrollmentDao
 
@@ -46,23 +50,22 @@ class SchemaRegistryService(implicit val actorSystem: ActorSystem, implicit val 
           }
       } ~
         put {
-          path("enrollment") {
-            entity(as[SchemaEnrollment]) { enrollment =>
+          path("enrollment" / Segment / Segment) { (strain, version) => {
+            entity(as[JsValue]) { enrollment =>
               complete {
-                new Parser()
-                  .parse(enrollment.schema.toString)
-
-                schemaEnrollmentDao.create(enrollment)
-                StatusCodes.Created
+                new Parser().parse(enrollment.toString)
+                schemaEnrollmentDao.update(SchemaEnrollment(strain, version, enrollment))
+                (StatusCodes.OK, None)
               }
             }
+          }
           }
         } ~
         delete {
           path("enrollment" / Segment / Segment) { (strain, version) =>
             complete {
               schemaEnrollmentDao.delete(strain, version)
-              StatusCodes.NoContent
+              (StatusCodes.NoContent, None)
             }
           }
         }
