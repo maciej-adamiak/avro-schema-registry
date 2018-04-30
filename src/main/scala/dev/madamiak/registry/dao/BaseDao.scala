@@ -1,0 +1,17 @@
+package dev.madamiak.registry.dao
+
+import slick.dbio.{Effect, NoStream}
+import slick.jdbc.H2Profile.api._
+import slick.sql.{FixedSqlStreamingAction, SqlAction}
+
+import scala.concurrent.Future
+
+trait BaseDao {
+
+  val database: Database
+
+  implicit def exec[A](action: FixedSqlStreamingAction[Seq[A], A, _ <: Effect]): Future[Seq[A]] = database.run(action)
+
+  implicit def exec[A](action: SqlAction[A, NoStream, _ <: Effect]): Future[A] = database.run(action)
+
+}
