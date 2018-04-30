@@ -1,7 +1,7 @@
 package dev.madamiak.registry.dao
 
 import dev.madamiak.registry.model.SchemaEnrollment
-import slick.jdbc.H2Profile.api._
+import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.Future
 
@@ -31,6 +31,10 @@ class SchemaEnrollmentDao(implicit val databaseComponent: DatabaseComponent) ext
 
   def create(enrollments: Seq[SchemaEnrollment]): Future[Option[Int]] = {
     databaseComponent.schemaEnrollmentTable ++= enrollments
+  }
+
+  def update(enrollment: SchemaEnrollment): Future[Int] = {
+    databaseComponent.schemaEnrollmentTable insertOrUpdate enrollment
   }
 
   def delete(id: (String, String)): Future[Int] = {

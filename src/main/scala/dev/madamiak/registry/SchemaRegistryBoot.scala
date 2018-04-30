@@ -6,7 +6,7 @@ import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory.load
 import dev.madamiak.registry.dao.DatabaseComponent
 import dev.madamiak.registry.service.SchemaRegistryService
-import slick.jdbc.H2Profile.api._
+import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.ExecutionContext
 

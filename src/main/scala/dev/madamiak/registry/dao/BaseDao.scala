@@ -1,7 +1,7 @@
 package dev.madamiak.registry.dao
 
 import slick.dbio.{Effect, NoStream}
-import slick.jdbc.H2Profile.api._
+import slick.jdbc.PostgresProfile.api._
 import slick.sql.{FixedSqlStreamingAction, SqlAction}
 
 import scala.concurrent.Future
