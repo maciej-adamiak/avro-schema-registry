@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 3
 image:
   name: madamiak/avro-schema-registry
   version: 0.4.0-SNAPSHOT
