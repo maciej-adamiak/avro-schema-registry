@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   name: madamiak/avro-schema-registry
-  version: 0.3.2-SNAPSHOT
+  version: 0.4.0-SNAPSHOT
   pullPolicy: IfNotPresent
 service:
   name: tcp

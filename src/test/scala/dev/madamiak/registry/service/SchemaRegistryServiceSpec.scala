@@ -18,7 +18,7 @@ class SchemaRegistryServiceSpec extends WordSpec with Matchers with ScalatestRou
   implicit val databaseComponent: DatabaseComponent = new DatabaseComponent
 
   val schemaRegistryService                    = new SchemaRegistryService()
-  val enrollmentRoute: Route                   = schemaRegistryService.enrollmentRoute
+  val enrollmentRoute: Route                   = schemaRegistryService.route
   val schemaEnrollmentDao: SchemaEnrollmentDao = schemaRegistryService.schemaEnrollmentDao
 
   val enrollmentA = SchemaEnrollment("testStrainA", "0.0.1", """{ "a": 1 }""".toJson)
