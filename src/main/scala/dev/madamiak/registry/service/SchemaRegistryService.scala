@@ -13,10 +13,10 @@ import spray.json._
 import scala.concurrent.ExecutionContext
 
 class SchemaRegistryService(
-                             implicit val actorSystem: ActorSystem,
-                             implicit val executionContext: ExecutionContext,
-                             implicit val databaseConfig: DatabaseComponent
-                           ) {
+    implicit val actorSystem: ActorSystem,
+    implicit val executionContext: ExecutionContext,
+    implicit val databaseConfig: DatabaseComponent
+) {
 
   val schemaEnrollmentDao: SchemaEnrollmentDao = new SchemaEnrollmentDao
 
@@ -31,26 +31,33 @@ class SchemaRegistryService(
     handleExceptions(exceptionHandler) {
       get {
         path("enrollment") {
-          complete(schemaEnrollmentDao.findAll
-            .map(_.toJson))
+          complete(
+            schemaEnrollmentDao.findAll
+              .map(_.toJson)
+          )
         } ~
-          path("enrollment" / Segment) { strain =>
-            complete(schemaEnrollmentDao.findByStrain(strain)
-              .map(_.toJson))
-          } ~
-          path("enrollment" / Segment / Segment) { (strain, version) =>
-            complete {
-              schemaEnrollmentDao.findById(strain, version)
-                .map {
-                  row =>
-                    row.map(_.toJson)
-                      .getOrElse(throw new SchemaEnrollmentNotFoundException)
-                }
-            }
+        path("enrollment" / Segment) { strain =>
+          complete(
+            schemaEnrollmentDao
+              .findByStrain(strain)
+              .map(_.toJson)
+          )
+        } ~
+        path("enrollment" / Segment / Segment) { (strain, version) =>
+          complete {
+            schemaEnrollmentDao
+              .findById(strain, version)
+              .map { row =>
+                row
+                  .map(_.toJson)
+                  .getOrElse(throw new SchemaEnrollmentNotFoundException)
+              }
           }
+        }
       } ~
-        put {
-          path("enrollment" / Segment / Segment) { (strain, version) => {
+      put {
+        path("enrollment" / Segment / Segment) { (strain, version) =>
+          {
             entity(as[JsValue]) { enrollment =>
               complete {
                 new Parser().parse(enrollment.toString)
@@ -59,16 +66,16 @@ class SchemaRegistryService(
               }
             }
           }
-          }
-        } ~
-        delete {
-          path("enrollment" / Segment / Segment) { (strain, version) =>
-            complete {
-              schemaEnrollmentDao.delete(strain, version)
-              (StatusCodes.NoContent, None)
-            }
+        }
+      } ~
+      delete {
+        path("enrollment" / Segment / Segment) { (strain, version) =>
+          complete {
+            schemaEnrollmentDao.delete(strain, version)
+            (StatusCodes.NoContent, None)
           }
         }
+      }
     }
 
   class SchemaEnrollmentNotFoundException extends RuntimeException

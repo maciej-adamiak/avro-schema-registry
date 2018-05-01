@@ -12,11 +12,13 @@ import spray.json._
 
 class SchemaRegistryServiceSpec extends WordSpec with Matchers with ScalatestRouteTest {
 
-  implicit val database: H2Profile.backend.DatabaseDef = Database.forURL("jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;", driver = "org.h2.Driver")
+  implicit val database: H2Profile.backend.DatabaseDef =
+    Database.forURL("jdbc:h2:mem:test1;DB_CLOSE_DELAY=-1;", driver = "org.h2.Driver")
+  
   implicit val databaseComponent: DatabaseComponent = new DatabaseComponent
 
-  val schemaRegistryService = new SchemaRegistryService()
-  val enrollmentRoute: Route = schemaRegistryService.enrollmentRoute
+  val schemaRegistryService                    = new SchemaRegistryService()
+  val enrollmentRoute: Route                   = schemaRegistryService.enrollmentRoute
   val schemaEnrollmentDao: SchemaEnrollmentDao = schemaRegistryService.schemaEnrollmentDao
 
   val enrollmentA = SchemaEnrollment("testStrainA", "0.0.1", """{ "a": 1 }""".toJson)
@@ -38,14 +40,14 @@ class SchemaRegistryServiceSpec extends WordSpec with Matchers with ScalatestRou
     "return json array when multiple schema registry enrollments have been defined" in {
       Get("/enrollment") ~> enrollmentRoute ~> check {
         status shouldEqual StatusCodes.OK
-        responseAs[Seq[SchemaEnrollment]] should contain allOf(enrollmentA, enrollmentB, enrollmentC, enrollmentD)
+        responseAs[Seq[SchemaEnrollment]] should contain allOf (enrollmentA, enrollmentB, enrollmentC, enrollmentD)
       }
     }
 
     "return json array when a specific schema registry enrollment has been defined" in {
       Get("/enrollment/testStrainA") ~> enrollmentRoute ~> check {
         status shouldEqual StatusCodes.OK
-        responseAs[Seq[SchemaEnrollment]] should contain allOf(enrollmentA, enrollmentB, enrollmentC)
+        responseAs[Seq[SchemaEnrollment]] should contain allOf (enrollmentA, enrollmentB, enrollmentC)
       }
     }
 

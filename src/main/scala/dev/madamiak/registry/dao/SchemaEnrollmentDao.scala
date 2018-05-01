@@ -11,41 +11,34 @@ class SchemaEnrollmentDao(implicit val databaseComponent: DatabaseComponent) ext
 
   def findAll: Future[Seq[SchemaEnrollment]] = databaseComponent.schemaEnrollmentTable.result
 
-  def findByStrain(strain: String): Future[Seq[SchemaEnrollment]] = {
+  def findByStrain(strain: String): Future[Seq[SchemaEnrollment]] =
     databaseComponent.schemaEnrollmentTable
       .filter(x => x.strain === strain)
       .result
-  }
 
-  def findById(id: (String, String)): Future[Option[SchemaEnrollment]] = {
+  def findById(id: (String, String)): Future[Option[SchemaEnrollment]] =
     databaseComponent.schemaEnrollmentTable
       .filter(x => x.strain === id._1)
       .filter(x => x.version === id._2)
       .result
       .headOption
-  }
 
-  def create(enrollment: SchemaEnrollment): Future[Int] = {
+  def create(enrollment: SchemaEnrollment): Future[Int] =
     databaseComponent.schemaEnrollmentTable += enrollment
-  }
 
-  def create(enrollments: Seq[SchemaEnrollment]): Future[Option[Int]] = {
+  def create(enrollments: Seq[SchemaEnrollment]): Future[Option[Int]] =
     databaseComponent.schemaEnrollmentTable ++= enrollments
-  }
 
-  def update(enrollment: SchemaEnrollment): Future[Int] = {
+  def update(enrollment: SchemaEnrollment): Future[Int] =
     databaseComponent.schemaEnrollmentTable insertOrUpdate enrollment
-  }
 
-  def delete(id: (String, String)): Future[Int] = {
+  def delete(id: (String, String)): Future[Int] =
     databaseComponent.schemaEnrollmentTable
       .filter(x => x.strain === id._1)
       .filter(x => x.version === id._2)
       .delete
-  }
 
-  def truncate(): Future[Int] = {
+  def truncate(): Future[Int] =
     databaseComponent.schemaEnrollmentTable.delete
-  }
 
 }

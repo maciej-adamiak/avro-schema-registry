@@ -18,14 +18,16 @@ class DatabaseComponent(implicit val database: Database) {
   /**
     * Create schema if does not exist
     */
-  private val schemaCreation: Future[List[Unit]] = database.run(MTable.getTables)
+  private val schemaCreation: Future[List[Unit]] = database
+    .run(MTable.getTables)
     .map(v => v.map(mt => mt.name.name))
-    .map(names => List(schemaEnrollmentTable).filter(t =>
-      !names.contains(t.baseTableRow.tableName))
-      .map(_.schema.create))
-    .flatMap(c =>
-      database.run(DBIO.sequence(c))
+    .map(
+      names =>
+        List(schemaEnrollmentTable)
+          .filter(t => !names.contains(t.baseTableRow.tableName))
+          .map(_.schema.create)
     )
+    .flatMap(c => database.run(DBIO.sequence(c)))
 
   Await.result(schemaCreation, Duration.Inf)
 }

@@ -11,12 +11,13 @@ class SchemaEnrollmentTable(tag: Tag) extends Table[SchemaEnrollment](tag, "sche
   def strain = column[String]("strain")
 
   def version = column[String]("version")
-  
-  override def * = (strain, version, schema) <> ( { row =>
-    SchemaEnrollment(row._1, row._2, row._3.map(_.toChar).mkString.parseJson)
-  }, { enrollment: SchemaEnrollment =>
-    Some(enrollment.strain, enrollment.version, enrollment.schema.toString.getBytes)
-  })
+
+  override def * =
+    (strain, version, schema) <> ({ row =>
+      SchemaEnrollment(row._1, row._2, row._3.map(_.toChar).mkString.parseJson)
+    }, { enrollment: SchemaEnrollment =>
+      Some(enrollment.strain, enrollment.version, enrollment.schema.toString.getBytes)
+    })
 
   def schema = column[Array[Byte]]("schema")
 }
