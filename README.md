@@ -6,7 +6,23 @@ Run the project using command: `sbt "project registry" run`
 
 ### Docker
 
+#### Build local container
+
+```bash
+sbt docker:publishLocal 
+```
+
+#### Build and push continer
+
+```bash
+sbt docker:publish 
+```
+
 ### Kubernetes
+
+```bash
+helm install avro-schema-registry -n registry-app --set=database.password=VvWIFgkxLH,database.host=registry-datasource-postgresql,database.port=5432,database.name=postgres
+```
 
 ## API
 

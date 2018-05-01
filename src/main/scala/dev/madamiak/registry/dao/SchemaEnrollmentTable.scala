@@ -4,7 +4,7 @@ import dev.madamiak.registry.model.SchemaEnrollment
 import slick.jdbc.PostgresProfile.api._
 import spray.json._
 
-class SchemaEnrollmentTable(tag: Tag) extends Table[SchemaEnrollment](tag, "schemaEnrollment") {
+class SchemaEnrollmentTable(tag: Tag) extends Table[SchemaEnrollment](tag, "schema_enrollment") {
 
   def pk = primaryKey("id", (strain, version))
 

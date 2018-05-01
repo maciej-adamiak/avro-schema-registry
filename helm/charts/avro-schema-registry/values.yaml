@@ -1,0 +1,17 @@
+replicaCount: 1
+image:
+  name: madamiak/avro-schema-registry
+  version: 0.3.2-SNAPSHOT
+  pullPolicy: IfNotPresent
+service:
+  name: tcp
+  type: NodePort
+  externalPort: 30005
+  internalPort: 8000
+resources: {}
+database:
+  host: schema-registry-postgres
+  password: mysecretpassword
+  port: 5432
+  name: postgres
+  user: postgres

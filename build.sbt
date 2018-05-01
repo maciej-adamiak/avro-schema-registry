@@ -1,13 +1,19 @@
+import com.typesafe.config.{Config, ConfigFactory}
+
+BuildOperator.dockerConf := {
+  val config: Config = ConfigFactory.parseFile((resourceDirectory in Compile).value / "application.conf")
+  config.getInt("registry.port")
+}
+
 name := "avro-schema-registry"
 organization := "dev.madamiak"
-version := "0.3.0-SNAPSHOT"
+version := "0.3.2-SNAPSHOT"
 
 scalaVersion := "2.12.6"
 
 enablePlugins(JavaAppPackaging)
 maintainer in Docker := "Maciej Adamiak <adamiak.maciek@gmail.com>"
-dockerExposedPorts := Seq(8000)
-dockerRepository := Some("hub.docker.com")
+dockerExposedPorts := Seq(BuildOperator.dockerConf.value)
 dockerUsername := Some("madamiak")
 
 libraryDependencies ++= Seq(
