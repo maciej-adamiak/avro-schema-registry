@@ -27,7 +27,7 @@ class SchemaRegistryService(
       complete(StatusCodes.BadRequest, None)
   }
 
-  val enrollmentRoute: Route =
+  val route: Route =
     handleExceptions(exceptionHandler) {
       get {
         path("enrollment") {

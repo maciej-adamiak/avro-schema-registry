@@ -1,0 +1,9 @@
+apiVersion: v1
+description: Avro schema registry backend on postgresql
+keywords:
+  - avro
+  - registry
+name: avro-schema-registry
+sources: 
+  - https://github.com/maciej-adamiak/avro-schema-registry
+version: 0.1
