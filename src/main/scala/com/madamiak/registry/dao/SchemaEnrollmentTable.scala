@@ -1,6 +1,6 @@
-package dev.madamiak.registry.dao
+package com.madamiak.registry.dao
 
-import dev.madamiak.registry.model.SchemaEnrollment
+import com.madamiak.registry.model.SchemaEnrollment
 import slick.jdbc.PostgresProfile.api._
 import spray.json._
 

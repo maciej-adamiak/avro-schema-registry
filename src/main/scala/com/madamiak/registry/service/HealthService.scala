@@ -1,4 +1,4 @@
-package dev.madamiak.registry.service
+package com.madamiak.registry.service
 
 import akka.http.scaladsl.model.{HttpEntity, HttpResponse, StatusCodes}
 import akka.http.scaladsl.server.Directives._

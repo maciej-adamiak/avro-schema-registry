@@ -1,4 +1,4 @@
-package dev.madamiak.registry.dao
+package com.madamiak.registry.dao
 
 import slick.dbio.{Effect, NoStream}
 import slick.jdbc.PostgresProfile.api._

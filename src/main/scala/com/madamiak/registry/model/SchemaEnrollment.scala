@@ -1,4 +1,4 @@
-package dev.madamiak.registry.model
+package com.madamiak.registry.model
 
 import spray.json.JsValue
 

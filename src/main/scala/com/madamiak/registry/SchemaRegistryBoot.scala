@@ -1,12 +1,12 @@
-package dev.madamiak.registry
+package com.madamiak.registry
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import com.madamiak.registry.dao.DatabaseComponent
+import com.madamiak.registry.service.{HealthService, SchemaRegistryService}
 import com.typesafe.config.ConfigFactory.load
-import dev.madamiak.registry.dao.DatabaseComponent
-import dev.madamiak.registry.service.{HealthService, SchemaRegistryService}
 import slick.jdbc.PostgresProfile.api._
 
 import scala.concurrent.ExecutionContext

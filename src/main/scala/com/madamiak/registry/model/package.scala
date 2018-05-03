@@ -1,4 +1,4 @@
-package dev.madamiak.registry
+package com.madamiak.registry
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}

@@ -1,4 +1,4 @@
-package dev.madamiak.registry.dao
+package com.madamiak.registry.dao
 
 import slick.jdbc.PostgresProfile.api._
 import slick.jdbc.meta.MTable

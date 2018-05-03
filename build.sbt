@@ -6,8 +6,8 @@ BuildOperator.dockerConf := {
 }
 
 name := "avro-schema-registry"
-organization := "dev.madamiak"
-version := "0.4.0-SNAPSHOT"
+organization := "com.madamiak"
+version := "0.4.0"
 
 scalaVersion := "2.12.6"
 

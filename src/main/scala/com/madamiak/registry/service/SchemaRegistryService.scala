@@ -1,11 +1,11 @@
-package dev.madamiak.registry.service
+package com.madamiak.registry.service
 
 import akka.actor._
 import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
-import dev.madamiak.registry.dao.{DatabaseComponent, SchemaEnrollmentDao}
-import dev.madamiak.registry.model._
+import com.madamiak.registry.dao.{DatabaseComponent, SchemaEnrollmentDao}
+import com.madamiak.registry.model._
 import org.apache.avro.Schema.Parser
 import org.apache.avro.SchemaParseException
 import spray.json._
