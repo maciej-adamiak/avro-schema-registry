@@ -2,7 +2,7 @@
 
 ## Run
 ### SBT 
-Run the project using command: `sbt "project registry" run` 
+Run the project using command: `sbt run` 
 
 ### Docker
 
