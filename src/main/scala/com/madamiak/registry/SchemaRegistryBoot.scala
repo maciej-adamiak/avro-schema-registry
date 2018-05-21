@@ -24,7 +24,7 @@ object SchemaRegistryBoot extends App {
 
   Http().bindAndHandle(registryService.route ~
                        healthService.route,
-                       load ().getString("registry.host"),
+                       load().getString("registry.host"),
                        load().getInt("registry.port"))
 
 }
