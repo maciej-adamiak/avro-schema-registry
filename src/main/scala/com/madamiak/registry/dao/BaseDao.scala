@@ -5,6 +5,7 @@ import slick.jdbc.PostgresProfile.api._
 import slick.sql.{FixedSqlStreamingAction, SqlAction}
 
 import scala.concurrent.Future
+import scala.language.implicitConversions
 
 trait BaseDao {
 
