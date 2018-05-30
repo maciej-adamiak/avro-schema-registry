@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/maciej-adamiak/avro-schema-registry.svg?branch=master)](https://travis-ci.org/maciej-adamiak/avro-schema-registry)
+[![codecov](https://codecov.io/gh/maciej-adamiak/avro-schema-registry/branch/master/graph/badge.svg)](https://codecov.io/gh/maciej-adamiak/avro-schema-registry)
+[![CodeFactor](https://www.codefactor.io/repository/github/maciej-adamiak/avro-schema-registry/badge)](https://www.codefactor.io/repository/github/maciej-adamiak/avro-schema-registry)
+
 # Schema registry
 
 ## Run
